@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #1a5276; /* Dark blue color for the title */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        /* Add a blue color border for the dd mm yyyy section */
+        #birthdate {
+            border: 2px solid #007bff;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        /* Add a blue color border for the whole app */
+        .container {
+            border: 2px solid #007bff;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div style="text-align: center;">
+            <label for="birthdate">Enter your birthdate:</label>
+            <input type="date" id="birthdate">
+            <br>
+            <button onclick="calculateAge()">Calculate</button>
+            <div id="result"></div>
+        </div>
+
+        <script>
+            function calculateAge() {
+                var birthdateInput = document.getElementById("birthdate").value;
+                var birthdate = new Date(birthdateInput);
+                var today = new Date();
+
+                if (birthdate > today) {
+                    var resultElement = document.getElementById("result");
+                    resultElement.innerHTML = "<p class='error'>Invalid birthdate. Please enter a date before today.</p>";
+                    return;
+                }
+
+                var ageInMilliseconds = today - birthdate;
+
+                var ageDate = new Date(ageInMilliseconds);
+
+                var ageYears = ageDate.getUTCFullYear() - 1970;
+                var ageMonths = ageDate.getUTCMonth();
+                var ageDays = ageDate.getUTCDate() - 1;
+
+                var resultElement = document.getElementById("result");
+                resultElement.innerHTML = "Your age is: " + ageYears + " years, " + ageMonths + " months, and " + ageDays + " days.";
+            }
+        </script>
+    </div>
+</body>
+</html>
